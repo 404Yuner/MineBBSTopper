@@ -6,7 +6,7 @@
 
   <groupId>com.mythmc</groupId>
   <artifactId>MineBBSTopper</artifactId>
-  <version>3.6</version>
+  <version>3.7</version>
   <packaging>jar</packaging>
 
   <name>MineBBSTopper</name>
