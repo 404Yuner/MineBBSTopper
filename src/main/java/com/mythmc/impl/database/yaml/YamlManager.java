@@ -1,6 +1,7 @@
 package com.mythmc.impl.database.yaml;
 
 import com.mythmc.MineBBSTopper;
+import com.mythmc.file.statics.ConfigFile;
 import com.mythmc.file.statics.GUIFile;
 import com.mythmc.api.DbManager;
 import com.mythmc.tools.Debugger;
@@ -20,6 +21,7 @@ import java.util.Map;
 import java.util.Date;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class YamlManager implements DbManager {
 
@@ -80,13 +82,20 @@ public class YamlManager implements DbManager {
                 ));
 
         // 提取前十名玩家，并格式化为字符串列表
-        return playerCounts.entrySet().stream() // 将映射的条目转化为流
+        List<Map.Entry<String, Integer>> topPlayers = playerCounts.entrySet().stream() // 将映射的条目转化为流
                 .sorted((e1, e2) -> Integer.compare(e2.getValue(), e1.getValue())) // 按记录数量降序排序
-                .limit(10) // 取前十名
-                .map(e -> GUIFile.rankFormat // 将每个条目格式化为字符串
-                        .replace("%player%", e.getKey()) // 替换玩家名称占位符
-                        .replace("%count%", String.valueOf(e.getValue())) // 替换记录数量占位符
-                )
+                .limit(ConfigFile.rankPlayer) // 取设置的排名
+                .collect(Collectors.toList()); // 收集为列表
+
+        // 格式化前十名玩家的字符串列表，包含排名信息
+        return IntStream.range(0, topPlayers.size())
+                .mapToObj(index -> {
+                    Map.Entry<String, Integer> entry = topPlayers.get(index);
+                    return GUIFile.rankFormat
+                            .replace("%player%", entry.getKey()) // 替换玩家名称占位符
+                            .replace("%count%", String.valueOf(entry.getValue())) // 替换记录数量占位符
+                            .replace("%rank%", String.valueOf(index + 1)); // 替换排名占位符
+                })
                 .collect(Collectors.toList()); // 将结果收集为列表
     }
 

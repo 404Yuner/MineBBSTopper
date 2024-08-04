@@ -78,6 +78,8 @@ Setting:
   # 教程网址填写处，留空不显示
   # 可在tell操作中用占位符 %techUrl% 表示
   techUrl: '暂未配置教程网站'
+  # 显示在排行榜上的玩家数量。默认显示前十名
+  rankPlayer: 10
   # 是否给没有顶贴的玩家发送提示？
   sendRemindMessage: true
   # 代理的配置

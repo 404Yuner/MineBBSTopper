@@ -3,6 +3,7 @@ package com.mythmc.impl.database.mysql;
 
 
 import com.mythmc.api.DbManager;
+import com.mythmc.file.statics.ConfigFile;
 import com.mythmc.file.statics.GUIFile;
 import com.mythmc.tools.Debugger;
 import com.mythmc.tools.utils.TimeUtil;
@@ -102,20 +103,30 @@ public class MySQLManager implements DbManager {
      */
     public List<String> getTopTenPlayers() {
         // 查询前十名玩家的 SQL 语句
-        String sql = "SELECT player, COUNT(*) AS count FROM minebbstopper_data GROUP BY player ORDER BY count DESC LIMIT 10";
+        String sql = "SELECT player, COUNT(*) AS count FROM minebbstopper_data GROUP BY player ORDER BY count DESC LIMIT ?";
         List<String> topTenPlayers = new ArrayList<>(); // 存储前十名玩家的列表
         try (Connection connection = MySQLConnection.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
-            // 遍历结果集，格式化玩家信息并添加到列表中
-            while (rs.next()) {
-                String playerName = rs.getString("player");
-                int count = rs.getInt("count");
-                topTenPlayers.add(GUIFile.rankFormat.replace("%player%", playerName).replace("%count%", String.valueOf(count)));
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setInt(1, ConfigFile.rankPlayer); // 设置参数
+            try (ResultSet rs = pstmt.executeQuery()) {
+                int rank = 1; // 初始化排名为 1
+                while (rs.next()) {
+                    String playerName = rs.getString("player");
+                    int count = rs.getInt("count");
+                    // 格式化并添加排名信息
+                    String formattedInfo = GUIFile.rankFormat
+                            .replace("%player%", playerName)
+                            .replace("%count%", String.valueOf(count))
+                            .replace("%rank%", String.valueOf(rank));
+                    topTenPlayers.add(formattedInfo);
+                    rank++; // 更新排名
+                }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // 捕获并打印 SQL 异常
+            e.printStackTrace();
         }
+
         // 如果列表为空，添加占位信息
         if (topTenPlayers.isEmpty()) {
             topTenPlayers.add("§7虚位以待");

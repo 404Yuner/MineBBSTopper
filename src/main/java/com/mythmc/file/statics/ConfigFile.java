@@ -9,7 +9,7 @@ import java.util.List;
 public class ConfigFile {
     public static String Version,DataType,MySQLHost,MySQLDatabase,MySQLUser,MySQLPassword,url,reconnect,claimSpan,techUrl,proxyIP;
     public static boolean UpdateCheck,MySQLUseSSL,enableLimit,enableOffdayReward,isExtraRewards,isProxyMode,sendRemindMessage,isOldFormat;
-    public static int MySQLPort,cooldown,claimTime,openInterval,clickInterval,rankRefreshInterval,limitTimes,proxyPort;
+    public static int MySQLPort,cooldown,claimTime,openInterval,clickInterval,rankRefreshInterval,limitTimes,proxyPort,rankPlayer;
     public static List<String> normalRewardCommands,offdayRewardCommands,offdays;
 
     public void load() {
@@ -37,6 +37,7 @@ public class ConfigFile {
         rankRefreshInterval = config.getInt("Setting.rankRefreshInterval");
         sendRemindMessage = config.getBoolean("Setting.sendRemindMessage", true);
         isOldFormat = config.getBoolean("Setting.isOldFormat",false);
+        rankPlayer = config.getInt("Setting.rankPlayer", 10);
         // 奖励的配置
         normalRewardCommands = (List<String>) config.getList("Rewards.normal.commands");
         offdayRewardCommands = (List<String>) config.getList("Rewards.offday.commands");

@@ -15,7 +15,7 @@ Menu:
   # lore上使用 %rank% 即可展示
   # 使用papi %minebbstopper_rank_<1-10位次>% 可显示到悬浮字上
   # 排行榜有刷新间隔，可在config.yml内配置
-  rankFormat: " &7玩家:&a%player% &7- 次数:&b%count%"
+  rankFormat: "&6No.%rank% &7玩家:&a%player% &7- 次数:&b%count%"
   # 菜单的物品配置。可自行添加
   items:
     # 可无限制添加物品配置节点

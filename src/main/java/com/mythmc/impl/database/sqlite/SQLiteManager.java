@@ -1,6 +1,7 @@
 package com.mythmc.impl.database.sqlite;
 
 import com.mythmc.api.DbManager;
+import com.mythmc.file.statics.ConfigFile;
 import com.mythmc.file.statics.GUIFile;
 import com.mythmc.impl.database.DatabaseManager;
 import com.mythmc.tools.Debugger;
@@ -85,24 +86,33 @@ public class SQLiteManager implements DbManager {
     }
 
     public List<String> getTopTenPlayers() {
-        String sql = "SELECT player, COUNT(*) AS count FROM player_data GROUP BY player ORDER BY count DESC LIMIT 10";
+        String sql = "SELECT player, COUNT(*) AS count FROM player_data GROUP BY player ORDER BY count DESC LIMIT ?";
+
         List<String> topTenPlayers = new ArrayList<>();
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, ConfigFile.rankPlayer);
             ResultSet rs = pstmt.executeQuery();
+            int rank = 1; // 初始化排名为 1
             while (rs.next()) {
                 String playerName = rs.getString("player");
                 int count = rs.getInt("count");
-                topTenPlayers.add(GUIFile.rankFormat.replace("%player%", playerName).replace("%count%", String.valueOf(count)));
+                // 格式化并添加排名信息
+                String formattedInfo = GUIFile.rankFormat
+                        .replace("%player%", playerName)
+                        .replace("%count%", String.valueOf(count))
+                        .replace("%rank%", String.valueOf(rank));
+                topTenPlayers.add(formattedInfo);
+                rank++; // 更新排名
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         if (topTenPlayers.isEmpty()) {
             topTenPlayers.add("§7虚位以待");
         }
         return topTenPlayers;
     }
-
     public long getCooldownData() {
         String sql = "SELECT cooldown FROM cooldown_data";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
