@@ -31,18 +31,18 @@ public class Claim {
 
             // 记录玩家尝试领取奖励的日志
             Debugger.logger("玩家 " + playerName + " 正在尝试领取奖励...");
+
+            // 检查是否有正在进行的进程
+            if (isChecking) {
+                // 有进程在处理则发送消息给玩家，告知处理中的状态
+                MessageUtil.sendMessage(player, LangFile.processing);
+                // 记录日志，说明领取奖励失败的原因是已有进程在运行
+                Debugger.logger("玩家 " + playerName + " 尝试获取奖励失败。原因：已有进程在运行");
+                return false; // 结束方法，返回失败
+            }
+
             // 检查当前时间是否在允许领取奖励的时间段内
             if (TimeUtil.isCurrentHourWithinSpan()) {
-
-                // 检查是否有正在进行的进程
-                if (isChecking) {
-                    // 有进程在处理则发送消息给玩家，告知处理中的状态
-                    MessageUtil.sendMessage(player, LangFile.processing);
-                    // 记录日志，说明领取奖励失败的原因是已有进程在运行
-                    Debugger.logger("玩家 " + playerName + " 尝试获取奖励失败。原因：已有进程在运行");
-                    return false; // 结束方法，返回失败
-                }
-
                 // 获取 GlobalInfo 对象
                 GlobalInfo globalInfo = TargetManager.getGlobalInfo();
                 // 获取冷却时间戳
@@ -141,7 +141,7 @@ public class Claim {
                                 }
                             });
 
-                        } else {
+                        } else if (status.equals("false")){
                             // 如果获取到的时间元素不为 "true"，表示已经超出了领取时间
                             Debugger.logger("玩家 " + playerName + " 尝试获取奖励失败。原因：已超过十分钟领取时间");
                             // 发送消息给玩家，告知领取失败

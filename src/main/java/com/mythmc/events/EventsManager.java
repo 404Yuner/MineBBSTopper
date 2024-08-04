@@ -17,10 +17,10 @@ public class EventsManager {
 
     public void load() {
         // 注册事件
-        Bukkit.getPluginManager().registerEvents((Listener) new PlayerListener(), (Plugin) this.plugin);
-        Bukkit.getPluginManager().registerEvents((Listener) new MainGUI(), (Plugin) this.plugin);
-        Bukkit.getPluginManager().registerEvents((Listener) new RewardGUI(), (Plugin) this.plugin);
-        Bukkit.getPluginManager().registerEvents((Listener) new GUIListener(), (Plugin) this.plugin);
+        Bukkit.getPluginManager().registerEvents((Listener) new PlayerListener(), (Plugin) plugin);
+        Bukkit.getPluginManager().registerEvents((Listener) new MainGUI(), (Plugin) plugin);
+        Bukkit.getPluginManager().registerEvents((Listener) new RewardGUI(), (Plugin) plugin);
+        Bukkit.getPluginManager().registerEvents((Listener) new GUIListener(), (Plugin) plugin);
         plugin.logger("§a注册 §8| §a成功注册事件监听器");
     }
 }

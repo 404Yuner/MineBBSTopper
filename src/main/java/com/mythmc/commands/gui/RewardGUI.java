@@ -120,9 +120,8 @@ public class RewardGUI implements Listener {
 
             // 设置物品的自定义模型数据（如果不是低版本）
             if (!MineBBSTopper.isLowVersion) {
-                String cmd = itemSection.getString("cmd");
-                int customModelData = (cmd != null) ? Integer.parseInt(cmd) : 0;
-                itemMeta.setCustomModelData(customModelData);
+                int cmd = itemSection.getInt("cmd",0);
+                itemMeta.setCustomModelData(cmd);
             }
 
             // 获取物品的描述信息

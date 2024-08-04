@@ -9,13 +9,13 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 
 public class GUIFile {
-    public static String mainMenuName,mainMenuOpenSound,rankFormat;
+    public static String mainMenuName,rankFormat;
     public static int mainMenuSize;
     public static ConfigurationSection mainMenuItems,mainMenuEvents;
 
     // 累计GUI
     public static ConfigurationSection rewardMenuItems,rewardMenuEvents;
-    public static String rewardMenuName,rewardMenuOpenSound,rewardMenuStatusYes,rewardMenuStatusNo,rewardMenuStatusClaim,rewardMenuClaimedMat;
+    public static String rewardMenuName,rewardMenuStatusYes,rewardMenuStatusNo,rewardMenuStatusClaim,rewardMenuClaimedMat;
     public static int rewardMenuSize;
     public static boolean rewardMenuEnable;
     public  void load(){

@@ -4,7 +4,7 @@
   <groupId>com.mythmc</groupId>
   <artifactId>MineBBSTopper</artifactId>
   <name>MineBBSTopper</name>
-  <version>3.6</version>
+  <version>3.7</version>
   <build>
     <resources>
       <resource>

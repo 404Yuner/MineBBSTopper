@@ -93,9 +93,8 @@ public class MainGUI implements Listener {
             itemMeta.setDisplayName(ColorUtil.colorize(PAPIUtil.set(player,itemSection.getString("name", " "))));
             // 如果不是低版本，则设置自定义模型数据
             if (!MineBBSTopper.isLowVersion) {
-                String cmd = itemSection.getString("cmd");
-                int customModelData = (cmd != null) ? Integer.parseInt(cmd) : 0;
-                itemMeta.setCustomModelData(customModelData);
+                int cmd = itemSection.getInt("cmd",0);
+                itemMeta.setCustomModelData(cmd);
             }
 
             List<String> lore = itemSection.getStringList("lore"); // 获取物品的lore
