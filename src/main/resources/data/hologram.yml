@@ -1,0 +1,18 @@
+Hologram:
+  # 是否启用全息图
+  # 刷新间隔在 config.yml 内配置
+  # 排行榜名次格式在 gui/main.yml 内配置
+  enable: false
+  # 暂无其它插件选择
+  plugin: DecentHolograms
+  # 全息图排名的第一行
+  header: " &7<- &bMineBBS &a顶贴排行榜 &7-> "
+  # 全息图排名的最后一行
+  footer: "&7<------------------->"
+  # 全息图排名的位置信息
+  # 需手动填好位置信息，重载插件后生效
+  location:
+    world: "world"
+    x: 0
+    y: 70
+    z: 0
