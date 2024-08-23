@@ -1,0 +1,171 @@
+# 不需要这个系统可以关掉
+Enable: true
+
+# 奖励状态配置，变量%status%用于lore之中
+Status:
+  "yes": '&a您可以领取累计顶贴%count%次奖励'
+  "no": '&7进度：&a%current% / %count% &7次'
+  "claimed": '&c您已经领取过这个奖励了'
+
+Menu:
+  # 支持自动解析PlaceholderAPI占位符
+  title: "#000000MineBBS-累计奖励"
+  # 支持大小 9,18,27,36,45,54
+  size: 27
+  # 打开或关闭此菜单执行的动作，支持条件运算
+  events:
+    open:
+      - "[sound]BLOCK_ANVIL_LAND"
+    close:
+      - "[sound]UI_BUTTON_CLICK"
+  # 已经领取后显示的材质
+  # 可以选填格式：BOOK#10   显示 cmd 为 10 的 book
+  claimedMat: "BARRIER"
+  # 菜单的物品配置。可自行添加
+  # 如果不是添加的累计奖励按钮，则请勿设置 label 与 require 项，否则会导致玩家刷取奖励！
+  items:
+    # 可无限制添加物品配置节点
+    # 普通的物品需要有硬性配置才会生效，否则会报错
+    info:
+      # --- 【普通硬性配置：name】 ---
+      # 支持自动解析PlaceholderAPI占位符
+      name: "&6本服的宣传贴链接"
+      # --- 【普通硬性配置：mat】 ---
+      # 物品的材质，不区分大小写，若物品不支持则会显示基岩
+      # 查看可用枚举值：https://pastebin.com/Fe65HZnN
+      # ==========================================
+      # 如需使用玩家头颅，mat有三种配置方法：
+      # 1. head:%player% 显示自己的头颅
+      # 2. head:Dream 显示玩家名为Dream的头颅
+      # 3. head:BASE64格式 显示以BASE64格式编码的头颅
+      # ==========================================
+      # 注意：1.12的catserver 用不了头颅功能，否则会报错
+      mat: "DIAMOND"
+      # --- 【普通硬性配置：slot】 ---
+      # 支持多个槽位设置，请用列表写法
+      # eg: [11, 12, 13, 14, 15]
+      slot: 10
+      # --- 【普通硬性配置：lore】 ---
+      # 物品的描述，支持自动解析PlaceholderAPI占位符
+      # 若不需要lore 则设为 lore: [] 即可
+      lore:
+        - " "
+        - "&7在MineBBS上助力服务器宣传"
+        - " "
+        - "&e点击即可获取顶贴链接！"
+      # --- 【普通硬性配置：commands】 ---
+      # 参考 config.yml 内的动作配置
+      # 若不需要动作指令，则设为 commands: [] 即可
+      commands:
+        - "[close]"
+        - "[tell]本服务器的宣传地址为: %serverUrl%"
+      # --- 【可选配置：cmd】 ---
+      # 1.13版本以上的CustomModelData自定义物品材质的值
+      # 不设置默认为 0
+      cmd: 0
+      # --- 【可选配置：amount】 ---
+      # 物品的数量
+      # 不设置默认为 1
+      amount: 1
+      # --- 【可选配置：glow】 ---
+      # 给物品附魔，物品发光状态
+      # 不设置默认为 false
+      glow: false
+      # --- 【可选配置：flag】 ---
+      # 给物品需要隐藏的标签
+      # 可选标签如下：
+      # HIDE_ENCHANTS,HIDE_ATTRIBUTES,HIDE_UNBREAKABLE,HIDE_DESTROYS,
+      # HIDE_PLACED_ON,HIDE_POTION_EFFECTS,HIDE_DYE,HIDE_ARMOR_TRIM;
+      flag:
+        - 'HIDE_ENCHANTS'
+
+    # 奖励物品的配置 注意奖励物品的硬性要求
+    # 如果没有配置奖励的硬性要求，则无法正常领取累计奖励
+    1:
+      name: "&6顶贴10次累计奖励"
+      mat: "iron_ingot"
+      # --- 【奖励硬性配置：label】 ---
+      # 此奖励所代表的标签，可设置 1-10 的整数
+      # 意味着你最多可设置 10 个累计奖励
+      label: 1
+      # --- 【奖励硬性配置：require】 ---
+      # 领取该奖励所需要的顶贴次数
+      require: 10
+      slot: 10
+      lore:
+        - " "
+        - "&7奖励: 钻石 x10"
+        - " "
+        - "%status%"
+      commands:
+        - "[console]give %player% diamond 10"
+        - "[close]"
+    2:
+      name: "&6顶贴20次累计奖励"
+      mat: "gold_ingot"
+      label: 2
+      require: 20
+      slot: 12
+      lore:
+        - " "
+        - "&7奖励: 钻石 x20"
+        - " "
+        - "%status%"
+      commands:
+        - "[close]"
+        - "[console]give %player% diamond 20"
+    3:
+      name: "&6顶贴30次累计奖励"
+      mat: "diamond"
+      label: 3
+      require: 30
+      slot: 14
+      lore:
+        - " "
+        - "&7奖励: 钻石 x30"
+        - " "
+        - "%status%"
+      commands:
+        - "[close]"
+        - "[console]give %player% diamond 30"
+    4:
+      name: "&6顶贴40次累计奖励"
+      mat: "emerald"
+      label: 4
+      require: 40
+      slot: 16
+      lore:
+        - " "
+        - "&7奖励: 钻石 x40"
+        - " "
+        - "%status%"
+      commands:
+        - "[close]"
+        - "[console]give %player% diamond 40"
+     # 奖励可继续拓展，但最多配置十个。
+     # ！！重点检查 label 和 require 配置是否无误！！
+     # 示例如下，注意检查 YAML 格式：
+
+#    5: <- 这个地方别与前面的重复了！
+#      name: "&6顶贴50次累计奖励"
+#      mat: "emerald"
+#      label: 5 <- 着重注意！只可配置 1-10 的整数！不要与前面的重复了！
+#      require: 50 <- 着重注意！这里配置需要的次数！
+#      slot: 16
+#      lore:
+#        - " "
+#        - "&7奖励: 钻石 x50" <- 别忘改奖励
+#        - " "
+#        - "%status%"
+#      commands:
+#        - "[close]"
+#        - "[console]give %player% diamond 50" <- 别忘改奖励
+
+    frame:
+      name: "&6边框"
+      mat: "STAINED_GLASS_PANE"
+      slot: [0,1,2,3,4,5,6,7,8,9,11,13,15,17,18,19,20,21,23,24,25,26]
+      cmd: 0
+      lore: []
+      commands:
+        - "[sound]UI_BUTTON_CLICK"

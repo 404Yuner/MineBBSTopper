@@ -1,0 +1,31 @@
+Message:
+  # 插件的前缀；%prefix% 可使用在动作中
+  prefix: "&7[&a顶贴&7] "
+  # 没获取到顶贴提示
+  fail: "&c暂未查询到顶贴记录"
+  # 网站异常的消息
+  networkError: "&c获取网站失败，请联系管理员获取支持"
+  needPermission: "&c您没有权限执行该指令!"
+  # 当玩家在非顶贴时间段领取奖励的提示；%time% 返回 config.yml 内 Setting.claimTime配置的内容
+  wait: "&c啊偶,服务器暂未开启夜间顶贴领奖功能. 允许顶贴时间为 %time%时"
+  # 玩家间隔时间太短打开菜单的提示；%time% 返回 config.yml 内 Setting.interval配置的内容
+  openIntervalMsg: "&c你还在打开菜单冷却时间内，请稍后再试！ 打开菜单间隔: %time%秒"
+  # 在冷却时间内，无法打开顶贴菜单； %time% 返回数据库内记录的冷却结束时间
+  upIntervalMsg: "&c下次可顶贴的时间为 &b%time% &c请等待顶贴冷却时间过后再试，在这冷却期间内顶贴不会发放奖励!"
+  # 未启用累计奖励菜单的提示
+  rewardUntenable: "&c服务器暂未启用累计顶贴奖励模块"
+  # 当玩家领取累计奖励时，还没达到指定顶贴次数时发送的提示；%require% 返回需要的顶贴次数，%count% 返回玩家顶贴次数
+  rewardClaimNo: "&c暂未达到%require%次顶贴次数，您现在顶贴次数为%count%，暂不能领取该奖励！"
+  # 玩家领取累计奖励成功后的提示；%require% 返回需要的顶贴次数，%count% 返回玩家顶贴次数
+  rewardClaimYes: "&a成功领取累计顶贴%require%次奖励！"
+  # 玩家重复领取时的提示
+  rewardClaimed: "&c你已领取过这个奖励，无法再此领取！"
+  # 玩家利用网络波动重复刷取奖励的提示
+  processing: "&c当前已有顶贴检测正在进行中，本次检查顶贴失败，请过一会儿再试！"
+  # 当玩家超过每日顶贴限制次数后的提示
+  limited: "&c每天仅可顶贴%limit%次，你目前已经达到限制了！"
+  # 给没顶过贴的玩家发送消息，可在config.yml内关闭
+  remindMessage: "&a快来顶贴服务器，获得丰厚奖励！详情指令 &c&n/minebbstopper open"
+  # 获取网站超时的时候给玩家发送的提示
+  timeout: "&c服务器网络波动，获取顶贴失败！请稍后重试。"
+
