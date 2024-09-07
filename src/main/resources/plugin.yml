@@ -1,0 +1,12 @@
+name: MineBBSTopper
+version: '4.8'
+main: com.mythmc.MineBBSTopper
+api-version: 1.13
+author: "404Yuner"
+softdepend: [PlaceholderAPI,PlayerPoints,Vault,DecentHolograms,HolographicDisplays]
+folia-supported: true
+
+commands:
+  minebbstopper:
+    description: '插件的主要指令'
+    aliases: [mt, topper]
